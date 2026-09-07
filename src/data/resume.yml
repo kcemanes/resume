@@ -108,7 +108,7 @@ experience:
 
   - role: Intermediate Software Developer
     company: Bright Health Solutions, Vancouver, BC Canada
-    time: November 2015 - March 2024
+    time: July 2022 - March 2024
     highlights:
       - Executed key development tasks for the application modernization project,
         converting a legacy PowerBuilder desktop application to a modern web stack
@@ -124,6 +124,14 @@ experience:
             as system security and deployment, including Keycloak integration for
             authentication and setup of CI/CD pipelines using Atlassian Bitbucket and
             Microsoft Azure.
+      - Implemented bulk faxing for the EMR's inbound/outbound electronic faxing
+        feature, enabling clinical documents to be dispatched to multiple recipients in
+        a single operation.
+
+  - role: Software Developer
+    company: Bright Health Solutions, Vancouver, BC Canada
+    time: November 2015 - June 2022
+    highlights:
       - text: "Enhanced core EMR functionality through complex integrations:"
         children:
           - Developed a .NET Core web API service to facilitate a SMART on FHIR
