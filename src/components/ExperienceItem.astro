@@ -1,0 +1,79 @@
+---
+import { toHighlight, type Experience } from "~/lib/schema";
+
+interface Props {
+  entry: Experience;
+}
+
+const { entry } = Astro.props;
+const highlights = entry.highlights.map(toHighlight);
+---
+
+<article class="relative mb-7 pl-5 last:mb-0 print:static print:mb-4 print:pl-0">
+  <!-- Timeline rail -->
+  <span
+    class="absolute top-[0.55rem] left-0 size-2 rounded-full bg-accent-500 ring-4 ring-accent-100 dark:bg-accent-400 dark:ring-accent-900/60 print:hidden"
+    aria-hidden="true"></span>
+  <span
+    class="absolute top-[1.3rem] bottom-[-1.75rem] left-[0.22rem] w-px bg-slate-200 dark:bg-slate-800 print:hidden"
+    aria-hidden="true"></span>
+
+  <header class="mb-2.5 print:mb-1.5">
+    <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+      <h3
+        class="text-[1.02rem] leading-snug font-semibold text-ink dark:text-slate-100 print:text-[10.4pt]"
+      >
+        {entry.role}
+      </h3>
+      <p
+        class="shrink-0 rounded-full bg-slate-100 px-2.5 py-0.5 text-[0.72rem] font-medium tracking-wide text-ink-soft tabular-nums dark:bg-slate-800/80 dark:text-slate-400 print:bg-transparent print:px-0 print:py-0 print:text-[8.4pt]"
+      >
+        {entry.time}
+      </p>
+    </div>
+    <p
+      class="mt-0.5 text-[0.875rem] text-accent-600 dark:text-accent-300 print:mt-0 print:text-[8.8pt] print:italic"
+    >
+      {entry.company}
+    </p>
+  </header>
+
+  {
+    entry.summary && (
+      <p class="mb-2 text-[0.875rem] text-ink-soft dark:text-slate-400 print:text-[8.8pt]">
+        {entry.summary}
+      </p>
+    )
+  }
+
+  {
+    highlights.length > 0 && (
+      <ul class="space-y-1.5 print:space-y-1">
+        {highlights.map((h) => (
+          <li class="text-[0.875rem] leading-relaxed text-ink-soft dark:text-slate-400 print:text-[8.8pt] print:leading-[1.4]">
+            <div class="flex items-start gap-2.5 print:gap-2">
+              <span
+                class="mt-[0.5rem] size-1.5 shrink-0 rounded-full bg-slate-300 dark:bg-slate-600 print:mt-[0.28rem] print:size-[3px] print:bg-black"
+                aria-hidden="true"
+              />
+              <span>{h.text}</span>
+            </div>
+            {h.children.length > 0 && (
+              <ul class="mt-1.5 ml-4 space-y-1 print:mt-1 print:ml-3.5 print:space-y-0.5">
+                {h.children.map((c) => (
+                  <li class="flex items-start gap-2.5 text-[0.845rem] text-ink-faint dark:text-slate-400 print:gap-2 print:text-[8.5pt] print:text-black">
+                    <span
+                      class="mt-[0.55rem] h-px w-2 shrink-0 bg-slate-300 dark:bg-slate-600 print:mt-[0.34rem] print:bg-black"
+                      aria-hidden="true"
+                    />
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</article>

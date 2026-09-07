@@ -1,0 +1,179 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+/* Tailwind 4 keys `dark:` off prefers-color-scheme by default. Bind it to a
+   root class instead so the toolbar toggle can override the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens. The accent is "azure" (#11659A), which replaced the previous
+   site's "oceanstale" (#2B6781). It is the same hue family with the grey taken
+   out, and it was built by luminance-matching oceanstale step for step: hue and
+   saturation move, relative luminance does not. Every contrast ratio the old
+   ramp met is therefore preserved exactly — 600 on white 7.28:1, 200 on 600
+   4.65:1 (the tightest; the 11px bold sidebar labels), 50 on 900 12.26:1, and
+   300 on slate-950 9.14:1 in dark mode.
+
+   Changing the accent means changing four things, not one: this ramp, the print
+   heading colour below (it hardcodes accent-800), both theme-color metas in
+   src/layouts/Base.astro, and the fill in public/favicon.svg.
+   --------------------------------------------------------------------------- */
+@theme {
+  --font-sans:
+    "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+
+  --color-accent-50: #eff6fb;
+  --color-accent-100: #d6eaf6;
+  --color-accent-200: #add4ed;
+  --color-accent-300: #76b6de;
+  --color-accent-400: #3790c7;
+  --color-accent-500: #11659a;
+  --color-accent-600: #105b8a;
+  --color-accent-700: #104e75;
+  --color-accent-800: #0d405f;
+  --color-accent-900: #09324b;
+
+  --color-ink: #26303d;
+  --color-ink-soft: #545e6c;
+  /* 5.0:1 on white — WCAG AA for body text. */
+  --color-ink-faint: #667080;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  :root.dark {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Visible, consistent keyboard focus everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-400);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  body {
+    @apply bg-slate-100 font-sans text-ink antialiased dark:bg-slate-950 dark:text-slate-300;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print / PDF. Ctrl-P produces the deliverable directly, so there is no
+   separate print page and no PDF library to download.
+   --------------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 12mm 14mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 9.6pt !important;
+    line-height: 1.42 !important;
+  }
+
+  /* Collapse the screen shell: no rounding, shadow, max-width or dark mode. */
+  .sheet {
+    max-width: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Print is a single column: the sidebar becomes a full-width header band
+     above the content rather than a left rail. A single column keeps the PDF's
+     linear text order identical to the document order, which is what a resume
+     parser reads. */
+  .sheet > div {
+    display: block !important;
+  }
+
+  .sidebar {
+    width: auto !important;
+    flex: none !important;
+    background: #fff !important;
+    color: #000 !important;
+    border-bottom: 1pt solid #999 !important;
+    padding-top: 0 !important;
+  }
+
+  .sidebar * {
+    color: #000 !important;
+    border-color: #bbb !important;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+
+  /* On screen the body copy is deliberately softer than the headings. On paper
+     that reads as washed out, and nested points ended up darker than the
+     parents they belong to — so flatten all main copy to near-black. */
+  .sheet main,
+  .sheet main * {
+    color: #111 !important;
+  }
+
+  /* accent-800. Hardcoded because @theme tokens are not available inside the
+     print block — keep this in sync with the ramp above. */
+  .sheet main h2 {
+    color: #0d405f !important;
+  }
+
+  .sheet main h3 {
+    color: #000 !important;
+  }
+
+  /* Keeps an entry from splitting across a page where it can be helped.
+     This is safe only because nothing in the print flow is positioned — see
+     the note on `print:static` in ExperienceItem.astro. A positioned element
+     paints after its in-flow siblings, which reorders the PDF text stream and
+     scrambles the section order a resume parser reads. */
+  .avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Section rules read as clutter on paper. */
+  .print-flat {
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+}

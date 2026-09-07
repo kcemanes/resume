@@ -1,0 +1,51 @@
+---
+import Icon from "~/components/Icon.astro";
+import type { Project } from "~/lib/schema";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<ul class="space-y-4 print:space-y-2.5">
+  {
+    projects.map((p) => (
+      <li class="avoid-break">
+        <h3 class="text-[0.95rem] font-semibold text-ink dark:text-slate-100 print:text-[9.6pt]">
+          {p.link ? (
+            <a
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-accent-600 hover:underline dark:text-accent-300"
+            >
+              {p.title}
+              <Icon name="external-link" class="size-3.5 opacity-70 print:hidden" />
+            </a>
+          ) : (
+            p.title
+          )}
+        </h3>
+        {p.link && (
+          <p class="hidden text-[8.2pt] text-black print:block">
+            {p.link.replace(/^https?:\/\//, "")}
+          </p>
+        )}
+        <p class="mt-1 text-[0.875rem] leading-relaxed text-ink-soft dark:text-slate-400 print:mt-0.5 print:text-[8.8pt]">
+          {p.description}
+        </p>
+        {p.stack.length > 0 && (
+          <ul class="mt-2 flex flex-wrap gap-1.5 print:mt-1 print:gap-1">
+            {p.stack.map((tech) => (
+              <li class="rounded border border-slate-200 bg-slate-50 px-2 py-[0.15rem] text-[0.78rem] text-ink-soft dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-400 print:border-0 print:bg-transparent print:px-0 print:py-0 print:text-[8.5pt] print:not-last:after:content-['_•']">
+                {tech}
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))
+  }
+</ul>

@@ -1,0 +1,55 @@
+---
+import Icon from "./Icon.astro";
+
+/**
+ * Theme toggle + print action. The only interactive JavaScript on the page
+ * (~500 bytes inline); everything else is static HTML.
+ */
+---
+
+<div class="no-print fixed top-4 right-4 z-20 flex gap-2 print:hidden">
+  <button
+    type="button"
+    id="theme-toggle"
+    class="flex size-9 items-center justify-center rounded-full border border-slate-300/70 bg-white/85 text-ink-soft shadow-sm backdrop-blur transition-colors hover:bg-white hover:text-accent-600 dark:border-slate-700 dark:bg-slate-900/85 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-accent-300"
+    aria-label="Switch between light and dark theme"
+  >
+    <Icon name="sun" class="size-[17px] dark:hidden" />
+    <Icon name="moon" class="hidden size-[17px] dark:block" />
+  </button>
+
+  <button
+    type="button"
+    id="print-button"
+    class="flex h-9 items-center gap-2 rounded-full border border-slate-300/70 bg-white/85 px-3.5 text-[0.8rem] font-medium text-ink-soft shadow-sm backdrop-blur transition-colors hover:bg-white hover:text-accent-600 dark:border-slate-700 dark:bg-slate-900/85 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-accent-300"
+  >
+    <Icon name="printer" class="size-[16px]" />
+    <span>PDF</span>
+  </button>
+</div>
+
+<script>
+  const root = document.documentElement;
+
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    const dark = root.classList.toggle("dark");
+    try {
+      localStorage.setItem("theme", dark ? "dark" : "light");
+    } catch {
+      /* private mode or blocked storage — the toggle still works this session */
+    }
+  });
+
+  /* Print in light mode regardless of the on-screen theme, so the PDF is
+     always ink-on-paper, then restore what the reader had. */
+  document.getElementById("print-button")?.addEventListener("click", () => {
+    const wasDark = root.classList.contains("dark");
+    if (wasDark) root.classList.remove("dark");
+    const restore = () => {
+      if (wasDark) root.classList.add("dark");
+      window.removeEventListener("afterprint", restore);
+    };
+    window.addEventListener("afterprint", restore);
+    window.print();
+  });
+</script>

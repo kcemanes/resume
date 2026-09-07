@@ -1,5 +1,19 @@
-# Cache
-_site/
-.sass-cache/
-.jekyll-metadata
-.jekyll-cache
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.production
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+npm-debug.log*

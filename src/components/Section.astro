@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  /** Anchor id, also used as the heading's accessible target. */
+  id: string;
+  class?: string;
+}
+
+const { title, id, class: className = "" } = Astro.props;
+---
+
+<section aria-labelledby={`${id}-heading`} id={id} class={`mb-9 last:mb-0 print:mb-5 ${className}`}>
+  <h2
+    id={`${id}-heading`}
+    class="mb-5 border-b border-slate-200 pb-2 text-[0.8rem] font-bold tracking-[0.16em] text-accent-600 uppercase dark:border-slate-800 dark:text-accent-300 print:mb-3 print:pb-1 print:text-[8.5pt] print:tracking-normal"
+  >
+    {title}
+  </h2>
+  <slot />
+</section>

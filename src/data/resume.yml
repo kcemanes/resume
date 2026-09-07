@@ -1,0 +1,239 @@
+# ---------------------------------------------------------------------------
+# The entire resume lives in this file. Edit it and the site rebuilds.
+# Structure is validated against src/lib/schema.ts at build time, so a typo
+# or a missing required field fails `npm run build` instead of rendering blank.
+# ---------------------------------------------------------------------------
+
+profile:
+  name: Kirby Cemanes
+  tagline: Software Development Consultant
+  avatar: profile.jpg
+  email: kfcemanes@gmail.com
+  citizenship: Canada / Philippines
+  linkedin: kirby-cemanes
+
+summary: >-
+  Software Development Consultant with 10+ years of experience delivering enterprise
+  applications, systems integration, and software modernization. Experienced across the
+  full SDLC, from business analysis and architecture to development, cloud deployment,
+  and production support. Core expertise includes .NET, React, Azure, PostgreSQL, APIs,
+  authentication, and DevOps.
+
+services:
+  - Custom Web Applications
+  - Systems Integration
+  - Legacy Modernization
+  - API Development
+  - Technical Consulting
+  - Database Design
+
+skills:
+  - title: Languages & Frameworks
+    items:
+      - C# (.NET Core / .NET 6+)
+      - ASP.NET Web API
+      - Entity Framework Core
+      - React / TypeScript
+      - GraphQL (HotChocolate)
+      - Python / Flask
+      - Bash / PowerShell
+  - title: Cloud & DevOps
+    items:
+      - Microsoft Azure (App Services, Container Apps, ACR, Pipelines)
+      - Docker
+      - Atlassian Bamboo
+      - Bitbucket
+      - Jira / Confluence
+  - title: Data
+    items:
+      - PostgreSQL
+      - MS SQL Server
+      - Oracle 10g
+  - title: Health Interoperability
+    items:
+      - HL7 FHIR R4
+      - HL7 CDA
+      - SMART on FHIR
+  - title: Identity & Security
+    items:
+      - OAuth 2.0 / OIDC
+      - Keycloak
+      - Microsoft Entra ID (Azure AD) SSO
+  - title: Enterprise & Legacy
+    items:
+      - PowerBuilder 2022 R3
+      - PeopleSoft HCM (PeopleTools 8.52)
+      - SAP ABAP
+
+experience:
+  - role: Senior Software Consultant
+    company: Bright Health Solutions, Canada (Remote)
+    time: April 2026 - Present
+    highlights:
+      - Implemented an AI-assisted clinical documentation workflow by integrating an
+        external AI scribe platform with a legacy PowerBuilder-based EMR system.
+      - Designed the integration pipeline for transmitting clinical encounter data,
+        receiving AI-generated structured summaries, and presenting editable formatted
+        output within the EMR interface.
+      - Extended legacy PowerBuilder components with modern web-based rendering
+        (HTML/CSS) to support AI-generated content and physician editing workflows.
+
+  - role: Software Consultant
+    company: Bright Health Solutions, Canada (Remote)
+    time: April 2024 - March 2026
+    highlights:
+      - text: >-
+          Led the design, full-stack implementation, and successful release of a seamless
+          eReferral integration between MOIS EMR and OceanMD, acting as the sole
+          technical expert and architect.
+        children:
+          - Engineered a highly available and resilient solution on Microsoft Azure,
+            utilizing HL7 FHIR R4, .NET 6, and PostgreSQL for robust data
+            interoperability and persistence.
+          - Secured the solution using Keycloak (Docker) as the OIDC provider for
+            authentication and authorization.
+          - Managed the entire project lifecycle end-to-end, encompassing technical
+            architecture, full-stack development, business analysis, rigorous testing,
+            and DevOps deployment strategy.
+      - Drove security and user experience improvements by designing and implementing
+        Microsoft Azure AD Authentication (SSO) for MOIS EMR, enabling users to
+        authenticate directly with their Azure AD credentials via a newly developed
+        agnostic OIDC client.
+      - Developed a lightweight .NET 9 JWT CLI tool to extend the limited capabilities of
+        PowerBuilder 2022 R3, enabling the asymmetric signature verification necessary
+        for a robust OAuth 2.0 / OIDC flow.
+      - Optimized application performance by engineering a high-performance database
+        schema logging system using PostgreSQL with JSONB, resulting in an 80% reduction
+        in execution time compared to the previous logging method.
+
+  - role: Intermediate Software Developer
+    company: Bright Health Solutions, Vancouver, BC Canada
+    time: November 2015 - March 2024
+    highlights:
+      - Executed key development tasks for the application modernization project,
+        converting a legacy PowerBuilder desktop application to a modern web stack
+        utilizing C# .NET Core, React + TypeScript, and GraphQL.
+      - text: >-
+          Provided critical development and implementation support for the Kucén medical
+          transportation information system, a custom-built web application that
+          coordinates First Nations medical travel across British Columbia, providing a
+          common platform across diverse communities for data collection and medical
+          travel services, built with React + TypeScript, .NET 6, and PostgreSQL.
+        children:
+          - Executed key tasks for the .NET GraphQL Web API using HotChocolate, as well
+            as system security and deployment, including Keycloak integration for
+            authentication and setup of CI/CD pipelines using Atlassian Bitbucket and
+            Microsoft Azure.
+      - text: "Enhanced core EMR functionality through complex integrations:"
+        children:
+          - Developed a .NET Core web API service to facilitate a SMART on FHIR
+            application (PHSA eForms) using OAuth 2.0 for secure communication.
+          - Integrated third-party electronic faxing and notification (SMS/Voice)
+            services via public-facing REST APIs.
+          - Created a Health Level Seven (HL7) CDA generation utility to ensure seamless
+            message exchange between EMR implementations.
+      - text: "Accelerated development and deployment cycles through process automation:"
+        children:
+          - Implemented an automated build process in Atlassian Bamboo, saving 2 hours
+            per build and significantly increasing development velocity.
+          - Created a web-based Python (Flask) application to streamline SQL patch
+            management, minimizing errors through templated SQL generation.
+          - Configured a stable testing environment using a Linux Server VM to host web
+            services within Docker containers.
+      - Applied Agile Scrum methodologies using the Atlassian suite (Jira, Bitbucket,
+        Confluence) to manage the full SDLC, translating complex business requirements
+        into actionable technical specifications.
+      - Designed and optimized intermediate to complex SQL scripts for managing and
+        maintaining client clinical information databases on PostgreSQL, while providing
+        high-level production support for mission-critical software.
+
+  - role: Application Technical Analyst
+    company: Northern Health Authority, Prince George, BC Canada
+    time: May 2019 - August 2019
+    highlights:
+      - Drove operational efficiency for the Home and Community Care portfolio (Procura
+        and MOIS applications) by developing and deploying process enhancement tools
+        using PowerShell and C# .NET.
+      - Designed and implemented a key automation process using PowerShell to streamline
+        the Procura system refresh lifecycle, significantly reducing manual effort and
+        refresh time.
+      - Managed the full lifecycle of Incidents, Problems, and Changes following ITIL
+        principles to ensure high availability and stability of mission-critical
+        Electronic Health Record (EHR) environments.
+      - Ensured EHR environment quality and compliance by meticulously maintaining system
+        settings and configurations to meet stringent organizational and Canadian
+        Ministry of Health requirements.
+      - Supported executive decision-making by designing and delivering custom reports
+        using SQL Server Management Studio (SSMS) and Reporting Services (SSRS).
+      - Documented system architecture, technical procedures, and user guides using
+        Confluence to facilitate knowledge transfer and maintain system continuity.
+
+  - role: Software Engineering Analyst
+    company: Accenture Inc., Cebu, Philippines
+    time: June 2012 - June 2015
+    highlights:
+      - Led a 4-person team supporting the outsourced HR ERP function (PeopleSoft
+        Enterprise HRMS 9.0 / PeopleTools 8.52) for a multinational consumer goods
+        company.
+      - Managed team workload, performance tracking, and incident resolution, achieving a
+        97% success rate for resolving incidents and tickets within Service Level
+        Agreements (SLA).
+      - Drove efficiency by analyzing ticket metrics and control reports, facilitating
+        team meetings, and creating comprehensive documentation (technical, functional,
+        and job aids).
+      - Executed critical database changes by creating and reviewing Master Reference
+        Data (MRD), Change Requests, and Data Mover Scripts (DMS) for Oracle Database
+        10g.
+      - Maintained strict adherence to governance by managing Build Issue Logs, Change
+        Control/Request Logs, and the Requirements Traceability Matrix (RTM).
+      - Provided 24/7 on-call support and coordinated effectively with international
+        counterparts across the USA, UK, India, and the Philippines during shift
+        rotations and batch job monitoring.
+
+education:
+  - degree: Post Diploma in Information Technology
+    institution: College of New Caledonia
+    time: 2017
+  - degree: BSc in Computer Engineering
+    institution: University of San Jose - Recoletos
+    time: 2012
+
+certifications:
+  - name: Linux Essentials
+    organization: Linux Professional Institute
+    credentialId: LPI000361093
+  - name: CompTIA A+
+    organization: CompTIA
+    credentialId: COMP001021002165
+  - name: Certified Fiber Optic Technician
+    organization: The Fiber Optic Association
+    credentialId: CSS184840
+  - name: Customer Service Specialist
+    organization: ETA International
+    credentialId: "3171614"
+
+projects:
+  - title: Marbel Contracting & General Services (MCGS)
+    link: https://mcgsphilcan.ca
+    description: >-
+      Designed, developed, deployed, and optimized the corporate website for a Canadian
+      workforce solutions company, including responsive design, SEO improvements,
+      Cloudflare configuration, and ongoing maintenance.
+
+personalProjects:
+  - title: Budget App
+    link: https://budget.kcemanes.com
+    description: >-
+      A personal expense tracker and budgeting app. Records income and spending, groups
+      transactions by category against monthly budgets, and reports on spending trends,
+      category breakdowns, and budget-vs-actual variance through interactive charts.
+      Built offline-first, with IndexedDB as the local source of truth and a sync engine
+      reconciling it against hosted Postgres, delivered as an installable PWA.
+    stack:
+      - React 19
+      - TypeScript
+      - Vite
+      - Tailwind CSS v4
+      - Supabase (Auth + Postgres)
+      - IndexedDB
+      - vite-plugin-pwa / Workbox

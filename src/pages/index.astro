@@ -1,0 +1,130 @@
+---
+import Base from "~/layouts/Base.astro";
+import Sidebar from "~/components/Sidebar.astro";
+import Section from "~/components/Section.astro";
+import ExperienceItem from "~/components/ExperienceItem.astro";
+import Toolbar from "~/components/Toolbar.astro";
+import ProjectList from "~/components/ProjectList.astro";
+import { loadResume } from "~/lib/resume";
+
+const resume = loadResume();
+const { summary, skills, experience, education, certifications, projects, personalProjects } =
+  resume;
+---
+
+<Base resume={resume}>
+  <Toolbar />
+
+  <div
+    class="sheet mx-auto my-0 max-w-5xl bg-white shadow-xl md:my-10 md:rounded-xl dark:bg-slate-900 print:my-0 print:shadow-none"
+  >
+    <div class="md:flex md:items-stretch">
+      <Sidebar resume={resume} />
+
+      <main id="main" class="min-w-0 flex-1 px-7 py-9 md:px-10 print:px-0 print:py-0">
+        <Section id="summary" title="Professional Summary">
+          <p
+            class="text-[0.925rem] leading-relaxed text-ink-soft dark:text-slate-400 print:text-[9pt] print:leading-[1.45]"
+          >
+            {summary}
+          </p>
+        </Section>
+
+        {
+          experience.length > 0 && (
+            <Section id="experience" title="Professional Experience">
+              {experience.map((entry) => (
+                <ExperienceItem entry={entry} />
+              ))}
+            </Section>
+          )
+        }
+
+        {
+          education.length > 0 && (
+            <Section id="education" title="Education">
+              <ul class="grid gap-3 sm:grid-cols-2 print:grid-cols-2 print:gap-2">
+                {education.map((e) => (
+                  <li class="avoid-break">
+                    <p class="text-[0.9rem] leading-snug font-semibold text-ink dark:text-slate-100 print:text-[9.2pt]">
+                      {e.degree}
+                    </p>
+                    <p class="text-[0.85rem] text-ink-soft dark:text-slate-400 print:text-[8.8pt]">
+                      {e.institution}
+                    </p>
+                    <p class="text-[0.8rem] text-ink-faint dark:text-slate-400 print:text-[8.4pt]">
+                      {e.time}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          )
+        }
+
+        {
+          skills.length > 0 && (
+            <Section id="skills" title="Technical Skills">
+              <dl class="grid gap-x-8 gap-y-4 sm:grid-cols-2 print:grid-cols-2 print:gap-x-6 print:gap-y-2.5">
+                {skills.map((group) => (
+                  <div class="avoid-break">
+                    <dt class="mb-1.5 text-[0.8rem] font-semibold text-ink dark:text-slate-200 print:mb-1 print:text-[8.8pt]">
+                      {group.title}
+                    </dt>
+                    <dd class="flex flex-wrap gap-1.5 print:gap-1">
+                      {group.items.map((item) => (
+                        <span class="rounded border border-slate-200 bg-slate-50 px-2 py-[0.15rem] text-[0.78rem] text-ink-soft dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-400 print:border-0 print:bg-transparent print:px-0 print:py-0 print:text-[8.5pt] print:not-last:after:content-['_•']">
+                          {item}
+                        </span>
+                      ))}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </Section>
+          )
+        }
+
+        {
+          projects.length > 0 && (
+            <Section id="projects" title="Freelance Projects">
+              <ProjectList projects={projects} />
+            </Section>
+          )
+        }
+
+        {
+          personalProjects.length > 0 && (
+            <Section id="personal-projects" title="Personal Projects">
+              <ProjectList projects={personalProjects} />
+            </Section>
+          )
+        }
+
+        {
+          certifications.length > 0 && (
+            <Section id="certifications" title="Certifications">
+              <ul class="grid gap-3 sm:grid-cols-2 print:grid-cols-2 print:gap-2">
+                {certifications.map((c) => (
+                  <li class="avoid-break print-flat rounded-lg border border-slate-200 px-3.5 py-2.5 dark:border-slate-800 print:rounded-none print:border-0 print:px-0 print:py-0">
+                    <p class="text-[0.875rem] font-semibold text-ink dark:text-slate-200 print:text-[8.8pt]">
+                      {c.name}
+                    </p>
+                    <p class="text-[0.8rem] text-ink-soft dark:text-slate-400 print:text-[8.4pt]">
+                      {c.organization}
+                    </p>
+                    {c.credentialId && (
+                      <p class="mt-0.5 font-mono text-[0.7rem] text-ink-faint dark:text-slate-400 print:mt-0 print:text-[7.6pt]">
+                        ID {c.credentialId}
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          )
+        }
+      </main>
+    </div>
+  </div>
+</Base>
