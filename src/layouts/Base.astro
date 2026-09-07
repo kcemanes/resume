@@ -67,8 +67,9 @@ const jsonLd = {
     <link rel="canonical" href={canonical.href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#11659a" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#09324b" media="(prefers-color-scheme: dark)" />
+    <!-- No prefers-color-scheme variant: the page defaults to light regardless
+         of the OS setting, so the browser chrome should too. -->
+    <meta name="theme-color" content="#11659a" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- Open Graph / Twitter -->
@@ -85,15 +86,17 @@ const jsonLd = {
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
-    <!-- Resolve the theme before first paint so there is no light/dark flash. -->
+    <!-- Resolve the theme before first paint so there is no light/dark flash.
+         Light is the default for everyone: the OS preference is deliberately
+         ignored, because the page is a resume and the light theme is the one
+         that matches the printed PDF. Dark is opt-in via the toolbar toggle,
+         and that choice is what gets remembered. -->
     <script is:inline>
       (() => {
         try {
-          const saved = localStorage.getItem("theme");
-          const dark =
-            saved === "dark" ||
-            (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
-          if (dark) document.documentElement.classList.add("dark");
+          if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+          }
         } catch {
           /* storage blocked — fall through to the light default */
         }
