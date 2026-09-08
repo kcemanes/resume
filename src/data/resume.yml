@@ -229,12 +229,13 @@ projects:
       Cloudflare configuration, and ongoing maintenance.
 
 personalProjects:
-  - title: Budget App
+  - title: Finance App
     link: https://budget.kcemanes.com
     description: >-
       A personal expense tracker and budgeting app. Records income and spending, groups
       transactions by category against monthly budgets, and reports on spending trends,
-      category breakdowns, and budget-vs-actual variance through interactive charts.
+      category breakdowns, and budget-vs-actual variance through interactive charts. 
+      Also includes a net worth tracking feature.
       Built offline-first, with IndexedDB as the local source of truth and a sync engine
       reconciling it against hosted Postgres, delivered as an installable PWA.
     stack:
